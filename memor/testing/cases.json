@@ -1,0 +1,226 @@
+[
+  {
+    "id": "case_1_location_update",
+    "statements": [
+      "I live in Pune right now.",
+      "I just got a new job and moved to Bangalore!"
+    ],
+    "expected_active": [
+      {
+        "predicate": "lives_in",
+        "object": "Bangalore"
+      }
+    ],
+    "expected_inactive": [
+      {
+        "predicate": "lives_in",
+        "object": "Pune"
+      }
+    ],
+    "query": "Where do I live?"
+  },
+  {
+    "id": "case_2_diet_additive",
+    "statements": [
+      "I really love eating pizza.",
+      "I'm also a huge fan of sushi."
+    ],
+    "expected_active": [
+      {
+        "predicate": "likes_food",
+        "object": "pizza"
+      },
+      {
+        "predicate": "likes_food",
+        "object": "sushi"
+      }
+    ],
+    "query": "What food do I like?"
+  },
+  {
+    "id": "case_3_diet_contradiction",
+    "statements": [
+      "I am a strict vegan.",
+      "I gave up my diet, I only eat meat now, full carnivore."
+    ],
+    "expected_active": [
+      {
+        "predicate": "diet",
+        "object": "carnivore"
+      }
+    ],
+    "expected_inactive": [
+      {
+        "predicate": "diet",
+        "object": "vegan"
+      }
+    ],
+    "query": "What is my diet?"
+  },
+  {
+    "id": "case_4_pet_additive",
+    "statements": [
+      "I have a dog named Max.",
+      "I just adopted a cat today."
+    ],
+    "expected_active": [
+      {
+        "predicate": "owns_pet",
+        "object": "dog"
+      },
+      {
+        "predicate": "owns_pet",
+        "object": "cat"
+      }
+    ],
+    "query": "What pets do I own?"
+  },
+  {
+    "id": "case_5_job_update",
+    "statements": [
+      "I work at Google.",
+      "I quit Google and just joined OpenAI."
+    ],
+    "expected_active": [
+      {
+        "predicate": "works_at",
+        "object": "OpenAI"
+      }
+    ],
+    "expected_inactive": [
+      {
+        "predicate": "works_at",
+        "object": "Google"
+      }
+    ],
+    "query": "Where do I work?"
+  },
+  {
+    "id": "case_6_hobby_additive",
+    "statements": [
+      "I play the guitar.",
+      "I've started learning the piano."
+    ],
+    "expected_active": [
+      {
+        "predicate": "plays_instrument",
+        "object": "guitar"
+      },
+      {
+        "predicate": "plays_instrument",
+        "object": "piano"
+      }
+    ],
+    "query": "What instruments do I play?"
+  },
+  {
+    "id": "case_7_relationship_update",
+    "statements": [
+      "I am single.",
+      "I just got married last week!"
+    ],
+    "expected_active": [
+      {
+        "predicate": "marital_status",
+        "object": "married"
+      }
+    ],
+    "expected_inactive": [
+      {
+        "predicate": "marital_status",
+        "object": "single"
+      }
+    ],
+    "query": "What is my marital status?"
+  },
+  {
+    "id": "case_8_language_additive",
+    "statements": [
+      "I speak English natively.",
+      "I learned Spanish in college."
+    ],
+    "expected_active": [
+      {
+        "predicate": "speaks_language",
+        "object": "English"
+      },
+      {
+        "predicate": "speaks_language",
+        "object": "Spanish"
+      }
+    ],
+    "query": "What languages do I speak?"
+  },
+  {
+    "id": "case_9_device_update",
+    "statements": [
+      "I use an iPhone 13.",
+      "I broke my phone and bought an Android."
+    ],
+    "expected_active": [
+      {
+        "predicate": "uses_device",
+        "object": "Android"
+      }
+    ],
+    "expected_inactive": [
+      {
+        "predicate": "uses_device",
+        "object": "iPhone"
+      }
+    ],
+    "query": "What phone do I use?"
+  },
+  {
+    "id": "case_10_duplicate_fact",
+    "statements": [
+      "My favorite color is blue.",
+      "I really like the color blue."
+    ],
+    "expected_active": [
+      {
+        "predicate": "favorite_color",
+        "object": "blue"
+      }
+    ],
+    "query": "What is my favorite color?"
+  },
+  {
+    "id": "case_11_multihop_base",
+    "statements": [
+      "My brother is named Alex.",
+      "Alex adopted a golden retriever dog named Buddy."
+    ],
+    "expected_active": [
+      {
+        "predicate": "brother",
+        "object": "Alex"
+      },
+      {
+        "predicate": "has_pet",
+        "object": "Buddy"
+      }
+    ],
+    "query": "What kind of dog does my brother have?"
+  },
+  {
+    "id": "case_12_multihop_contradiction",
+    "statements": [
+      "My friend Sarah lives in Austin.",
+      "Sarah actually moved to Seattle last month."
+    ],
+    "expected_active": [
+      {
+        "predicate": "lives_in",
+        "object": "Seattle"
+      }
+    ],
+    "expected_inactive": [
+      {
+        "predicate": "lives_in",
+        "object": "Austin"
+      }
+    ],
+    "query": "Where does my friend Sarah live?"
+  }
+]
