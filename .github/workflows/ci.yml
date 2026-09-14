@@ -1,0 +1,48 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install -e ".[dev,mcp]"
+      - name: Check imports
+        run: python -c "from memor.engine import MemoryEngine; print('Import OK')"
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install -e ".[dev,mcp]"
+      - name: Run offline unit tests
+        run: pytest tests/test_pruning.py -v
+
+  llm-evals:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install dependencies
+        run: pip install -e ".[dev,mcp]"
+      - name: Run LLM resolver and benchmark tests
+        env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+        if: ${{ env.GROQ_API_KEY != '' }}
+        run: pytest tests/test_resolver.py tests/test_benchmark.py -v
